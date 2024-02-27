@@ -152,6 +152,83 @@ paths:
             $ref: '#/definitions/response.ResponseError'
       tags:
       - Book
+  /api/book/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Book ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseDataSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseError'
+      tags:
+      - Book
+  /api/book/category/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Book ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseDataSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ResponseError'
+      tags:
+      - Book
+  /api/book/image/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Book ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseDataSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseError'
+      tags:
+      - Book
   /api/collection:
     delete:
       consumes:
@@ -169,16 +246,12 @@ paths:
             $ref: '#/definitions/response.ResponseError'
       tags:
       - CollectionController
-    post:
+  /api/collection/{id}:
+    get:
       consumes:
       - application/json
-      parameters:
-      - description: Request
-        in: body
-        name: request
-        required: true
-        schema:
-          $ref: '#/definitions/request.CollectionRequest'
+      description: Authenticate a user and generate a token based on the provided
+        credentials.
       produces:
       - application/json
       responses:
@@ -190,12 +263,19 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/response.ResponseError'
+      summary: Authenticate a user and generate a token
       tags:
       - CollectionController
-  /api/collection/{id}:
-    get:
+    post:
       consumes:
       - application/json
+      parameters:
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/request.CollectionRequest'
       produces:
       - application/json
       responses:

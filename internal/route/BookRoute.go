@@ -9,4 +9,8 @@ func BookRoute(r fiber.Router) {
 	app := r.Group("/book")
 
 	app.Get("/", controller.BookIndex)
+	app.Get("/image/:id", controller.BookGetImage)
+	app.Get("/:id", controller.BookDetail)
+	app.Get("/category/:id", controller.CategoryDetail)
+
 }
