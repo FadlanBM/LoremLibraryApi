@@ -1,0 +1,245 @@
+definitions:
+  request.AuthRequest:
+    properties:
+      email:
+        type: string
+      google_id:
+        type: string
+    type: object
+  request.CollectionRequest:
+    properties:
+      books_id:
+        type: integer
+      borrowers_id:
+        type: integer
+    type: object
+  request.RegisterRequest:
+    properties:
+      address:
+        type: string
+      email:
+        type: string
+      google_id:
+        type: string
+      name:
+        type: string
+      phone_number:
+        type: string
+    type: object
+  response.ResponseAuthSuccess:
+    properties:
+      status:
+        type: string
+      token:
+        type: string
+    type: object
+  response.ResponseDataSuccess:
+    properties:
+      data:
+        type: string
+      status:
+        type: string
+    type: object
+  response.ResponseError:
+    properties:
+      message:
+        type: string
+      status:
+        type: string
+    type: object
+  response.ResponseSuccess:
+    properties:
+      status:
+        type: string
+    type: object
+info:
+  contact:
+    email: fiber@swagger.io
+    name: API Support
+  description: This is a sample swagger for Fiber
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Fiber Example API
+  version: "1.0"
+paths:
+  /api/auth:
+    post:
+      consumes:
+      - application/json
+      description: Authenticate a user and generate a token based on the provided
+        credentials.
+      parameters:
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/request.AuthRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseAuthSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseError'
+      summary: Authenticate a user and generate a token
+      tags:
+      - Authorization
+  /api/auth/me:
+    get:
+      consumes:
+      - application/json
+      description: Authenticate a user and generate a token based on the provided
+        credentials.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseAuthSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseError'
+      summary: Authenticate a user and generate a token
+      tags:
+      - Authorization
+  /api/auth/register:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/request.RegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseDataSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseError'
+      tags:
+      - Register
+  /api/book:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseDataSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseError'
+      tags:
+      - Book
+  /api/collection:
+    delete:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseError'
+      tags:
+      - CollectionController
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/request.CollectionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseError'
+      tags:
+      - CollectionController
+  /api/collection/{id}:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseError'
+      tags:
+      - CollectionController
+  /api/profile/petugas/image/{id}:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: petugas ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Image Upload
+        in: formData
+        name: image
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseDataSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseError'
+      tags:
+      - Profile Petugas
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
