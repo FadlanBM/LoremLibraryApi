@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	sampulPath = "C:\\Users\\fadlan\\Documents\\LoremLibrary\\LoremLibrary\\public\\storage\\sampul\\"
+	sampulPath = "E:\\UKK\\LoremLibrary\\public\\storage\\sampul\\"
 )
 
 // BookIndex godoc
