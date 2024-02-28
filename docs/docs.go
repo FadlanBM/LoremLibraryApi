@@ -195,17 +195,11 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/response.ResponseError"
                         }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/response.ResponseError"
-                        }
                     }
                 }
             }
         },
-        "/api/book/image/{id}": {
+        "/api/book/image/{path}": {
             "get": {
                 "consumes": [
                     "application/json"
@@ -218,9 +212,9 @@ const docTemplate = `{
                 ],
                 "parameters": [
                     {
-                        "type": "integer",
-                        "description": "Book ID",
-                        "name": "id",
+                        "type": "string",
+                        "description": "path",
+                        "name": "path",
                         "in": "path",
                         "required": true
                     }
@@ -255,7 +249,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "Book ID",
+                        "description": "petugas ID",
                         "name": "id",
                         "in": "path",
                         "required": true

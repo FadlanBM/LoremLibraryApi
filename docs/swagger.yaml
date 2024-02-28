@@ -157,7 +157,7 @@ paths:
       consumes:
       - application/json
       parameters:
-      - description: Book ID
+      - description: petugas ID
         in: path
         name: id
         required: true
@@ -200,22 +200,18 @@ paths:
           description: Not Found
           schema:
             $ref: '#/definitions/response.ResponseError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/response.ResponseError'
       tags:
       - Book
-  /api/book/image/{id}:
+  /api/book/image/{path}:
     get:
       consumes:
       - application/json
       parameters:
-      - description: Book ID
+      - description: path
         in: path
-        name: id
+        name: path
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
