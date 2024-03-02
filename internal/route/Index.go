@@ -10,4 +10,5 @@ func Index(r fiber.Router) {
 	BookRoute(app)
 	LendingRoute(app)
 	CollectionRoute(app)
+	CommentRoute(app)
 }

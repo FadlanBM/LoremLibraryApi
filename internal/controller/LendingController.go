@@ -22,7 +22,7 @@ import (
 // @Produce json
 // @Success 200 {object} response.ResponseDataSuccess
 // @Failure 400 {object} response.ResponseError
-// @Router /api/book [get]
+// @Router /api/lending [get]
 func LendingIndex(c *fiber.Ctx) error {
 	var lending []models.Lending
 	userClaims, ok := c.Locals("borrowers").(jwt.MapClaims)

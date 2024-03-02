@@ -13,6 +13,15 @@ definitions:
       borrowers_id:
         type: integer
     type: object
+  request.CommentRequest:
+    properties:
+      buku_id:
+        type: integer
+      messages:
+        type: string
+      ratings:
+        type: number
+    type: object
   request.LendingRequest:
     properties:
       code:
@@ -155,8 +164,6 @@ paths:
     get:
       consumes:
       - application/json
-      description: Authenticate a user and generate a token based on the provided
-        credentials.
       produces:
       - application/json
       responses:
@@ -168,9 +175,8 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/response.ResponseError'
-      summary: Authenticate a user and generate a token
       tags:
-      - Lendings
+      - Book
   /api/book/{id}:
     get:
       consumes:
@@ -304,6 +310,99 @@ paths:
             $ref: '#/definitions/response.ResponseError'
       tags:
       - CollectionController
+  /api/comment:
+    post:
+      consumes:
+      - application/json
+      description: Authenticate a user and generate a token based on the provided
+        credentials.
+      parameters:
+      - description: Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/request.CommentRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseDataSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseError'
+      summary: Authenticate a user and generate a token
+      tags:
+      - Comment
+  /api/comment/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Book ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseDataSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseError'
+      tags:
+      - Comment
+  /api/comment/check/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Book ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseDataSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseError'
+      tags:
+      - Comment
+  /api/lending:
+    get:
+      consumes:
+      - application/json
+      description: Authenticate a user and generate a token based on the provided
+        credentials.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseDataSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseError'
+      summary: Authenticate a user and generate a token
+      tags:
+      - Lendings
   /api/lending/{id}:
     get:
       consumes:
