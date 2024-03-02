@@ -12,5 +12,4 @@ type Employees struct {
 	Role         string `gorm:"type:varchar(255);default:employee" json:"role" form:"role"`
 	Avatar       string `gorm:"type:varchar(255)" json:"avatar" form:"avatar"`
 	Active       string `gorm:"type:varchar(10);default:false" json:"active" form:"active"`
-	Lending      []Lending
 }

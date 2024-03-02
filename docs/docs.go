@@ -132,6 +132,7 @@ const docTemplate = `{
         },
         "/api/book": {
             "get": {
+                "description": "Authenticate a user and generate a token based on the provided credentials.",
                 "consumes": [
                     "application/json"
                 ],
@@ -139,8 +140,9 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Book"
+                    "Lendings"
                 ],
+                "summary": "Authenticate a user and generate a token",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -363,6 +365,164 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/lending/create": {
+            "post": {
+                "description": "Authenticate a user and generate a token based on the provided credentials.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Lendings"
+                ],
+                "summary": "Authenticate a user and generate a token",
+                "parameters": [
+                    {
+                        "description": "Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.LendingRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.ResponseDataSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/response.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/lending/history/{id}": {
+            "get": {
+                "description": "Authenticate a user and generate a token based on the provided credentials.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Lendings"
+                ],
+                "summary": "Authenticate a user and generate a token",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Lendings ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.ResponseDataSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/response.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/response.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/lending/list": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Lendings"
+                ],
+                "parameters": [
+                    {
+                        "description": "Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.ListLending"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.ResponseDataSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/response.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/lending/{id}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Lendings"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Lendings ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.ResponseDataSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/response.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
         "/api/profile/petugas/image/{id}": {
             "put": {
                 "consumes": [
@@ -427,6 +587,31 @@ const docTemplate = `{
                 },
                 "borrowers_id": {
                     "type": "integer"
+                }
+            }
+        },
+        "request.LendingRequest": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "return_date": {
+                    "type": "string"
+                }
+            }
+        },
+        "request.ListLending": {
+            "type": "object",
+            "properties": {
+                "book_id": {
+                    "type": "integer"
+                },
+                "lending_id": {
+                    "type": "integer"
+                },
+                "no_inventaris": {
+                    "type": "string"
                 }
             }
         },

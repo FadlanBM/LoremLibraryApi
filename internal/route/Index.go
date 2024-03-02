@@ -8,4 +8,6 @@ func Index(r fiber.Router) {
 	app := r.Group("/api")
 	AuhtRoute(app)
 	BookRoute(app)
+	LendingRoute(app)
+	CollectionRoute(app)
 }

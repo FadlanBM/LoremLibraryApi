@@ -11,5 +11,5 @@ func CollectionRoute(r fiber.Router) {
 	app.Use(middleware.APIKeyAuthMiddlewareMePeminjam)
 	app.Get("/", controller.CollectionIndex)
 	app.Get("/create", controller.CollectionCreate)
-	app.Get("/delete", controller.CollectionDelete)
+	app.Delete("/delete", controller.CollectionDelete)
 }
