@@ -15,4 +15,5 @@ func LendingRoute(r fiber.Router) {
 	app.Post("/list", controller.ListLendingCreate)
 	app.Get("/:id", controller.DetailLending)
 	app.Get("/history/:id", controller.HistroyLending)
+	app.Delete("/delete/:id", controller.DeleteLending)
 }

@@ -9,7 +9,8 @@ import (
 func CollectionRoute(r fiber.Router) {
 	app := r.Group("/collection")
 	app.Use(middleware.APIKeyAuthMiddlewareMePeminjam)
-	app.Get("/", controller.CollectionIndex)
-	app.Get("/create", controller.CollectionCreate)
-	app.Delete("/delete", controller.CollectionDelete)
+	app.Get("/", controller.LoveIndex)
+	app.Get("/check/:id", controller.CheckLoveIndex)
+	app.Post("/create/:id", controller.CollectionCreate)
+	app.Delete("/delete/:id", controller.CollectionDelete)
 }

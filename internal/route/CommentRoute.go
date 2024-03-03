@@ -12,5 +12,5 @@ func CommentRoute(r fiber.Router) {
 	app.Use(middleware.APIKeyAuthMiddlewareMePeminjam)
 	app.Post("/", controller.CommentCreate)
 	app.Get("/:id", controller.CommentIndex)
-	app.Get("/chack/:id", controller.CommentCheck)
+	app.Get("/check/:id", controller.CommentCheck)
 }

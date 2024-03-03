@@ -189,16 +189,8 @@ func HistroyLending(c *fiber.Ctx) error {
 		return c.Status(400).JSON(fiber.Map{"status": "false", "message": err.Error()})
 	}
 
-	var borrowers models.Borrowers
-	if err := config.DB.First(&borrowers, id).Error; err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return c.Status(404).JSON(fiber.Map{"status": "false", "message": "Data not found"})
-		}
-		return c.Status(500).JSON(fiber.Map{"status": "false", "message": err.Error()})
-	}
-
 	var lending models.Lending
-	if err := config.DB.First(&lending, "borrowers_id= ?", borrowers.ID).Error; err != nil {
+	if err := config.DB.First(&lending, id).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return c.Status(404).JSON(fiber.Map{"status": "false", "message": "Data tidak di temukan"})
 		}
@@ -228,4 +220,50 @@ func HistroyLending(c *fiber.Ctx) error {
 	}
 
 	return c.Status(200).JSON(bookWithCategories)
+}
+
+// DeleteLending godoc
+// @Tags Lendings
+// @Accept json
+// @Produce json
+// @Param id path int true "Lendings ID"
+// @Success 200 {object} response.ResponseDataSuccess
+// @Failure 400 {object} response.ResponseError
+// @Failure 404 {object} response.ResponseError
+// @Router /api/lending/delete/{id} [delete]
+func DeleteLending(c *fiber.Ctx) error {
+	idParam := c.Params("id")
+
+	id, err := strconv.Atoi(idParam)
+	if err != nil {
+		return c.Status(400).JSON(fiber.Map{"status": "false", "message": "Invalid ID format"})
+	}
+
+	var lending models.Lending
+	if err := config.DB.First(&lending, id).Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return c.Status(404).JSON(fiber.Map{"status": "false", "message": "Data Not Found"})
+		}
+		return c.Status(500).JSON(fiber.Map{"status": "false", "message": "Failed to retrieve lending data"})
+	}
+
+	var listLending []models.ListLending
+	if err := config.DB.Find(&listLending, "lending_id = ?", lending.ID).Error; err != nil {
+		return c.Status(500).JSON(fiber.Map{"status": "false", "message": "Failed to retrieve list lending data"})
+	}
+
+	if len(listLending) == 0 {
+		return c.Status(404).JSON(fiber.Map{"status": "false", "message": "List lending data not found"})
+	}
+
+	if res := config.DB.Unscoped().Delete(&listLending); res.Error != nil {
+		return c.Status(500).JSON(fiber.Map{"status": "false", "message": "Failed to delete list lending data"})
+	}
+
+	if res := config.DB.Unscoped().Delete(&lending); res.Error != nil {
+		return c.Status(500).JSON(fiber.Map{"status": "false", "message": "Failed to delete lending data"})
+	}
+
+	return c.Status(200).JSON(fiber.Map{"status": "true", "message": "Success delete data"})
+
 }
