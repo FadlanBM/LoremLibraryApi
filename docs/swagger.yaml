@@ -116,26 +116,6 @@ paths:
       summary: Authenticate a user and generate a token
       tags:
       - Authorization
-  /api/auth/me:
-    get:
-      consumes:
-      - application/json
-      description: Authenticate a user and generate a token based on the provided
-        credentials.
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/response.ResponseAuthSuccess'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/response.ResponseError'
-      summary: Authenticate a user and generate a token
-      tags:
-      - Authorization
   /api/auth/register:
     post:
       consumes:
@@ -575,6 +555,45 @@ paths:
             $ref: '#/definitions/response.ResponseError'
       tags:
       - Lendings
+  /api/me:
+    get:
+      consumes:
+      - application/json
+      description: Authenticate a user and generate a token based on the provided
+        credentials.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseAuthSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseError'
+      summary: Authenticate a user and generate a token
+      tags:
+      - Authorization
+  /api/me/delete:
+    get:
+      consumes:
+      - application/json
+      description: Delete user account and associated data from the database.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseError'
+      summary: Delete user account and associated data
+      tags:
+      - Authorization
   /api/profile/petugas/image/{id}:
     put:
       consumes:

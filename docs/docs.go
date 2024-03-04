@@ -63,35 +63,6 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/auth/me": {
-            "get": {
-                "description": "Authenticate a user and generate a token based on the provided credentials.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Authorization"
-                ],
-                "summary": "Authenticate a user and generate a token",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/response.ResponseAuthSuccess"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/response.ResponseError"
-                        }
-                    }
-                }
-            }
-        },
         "/api/auth/register": {
             "post": {
                 "consumes": [
@@ -751,6 +722,64 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/response.ResponseDataSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/response.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/me": {
+            "get": {
+                "description": "Authenticate a user and generate a token based on the provided credentials.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Authorization"
+                ],
+                "summary": "Authenticate a user and generate a token",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.ResponseAuthSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/response.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/me/delete": {
+            "get": {
+                "description": "Delete user account and associated data from the database.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Authorization"
+                ],
+                "summary": "Delete user account and associated data",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.ResponseSuccess"
                         }
                     },
                     "400": {

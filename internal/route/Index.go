@@ -11,4 +11,5 @@ func Index(r fiber.Router) {
 	LendingRoute(app)
 	CollectionRoute(app)
 	CommentRoute(app)
+	MetRoute(app)
 }
